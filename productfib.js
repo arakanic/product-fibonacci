@@ -1,5 +1,5 @@
 function productFib(prod){
-    function fibonacci(num, memo) {
+    const fibonacci = (num, memo) => {
       memo = memo || {};
       if (memo[num]) {
         return memo[num];
@@ -9,14 +9,20 @@ function productFib(prod){
       }
       return memo[num] = fibonacci(num - 1, memo) + fibonacci(num - 2, memo);
     }
-      
+  
+    let n = 0;
+    let product = 1;
     let result = [];
-    // find closest f(n), f(n + 1) whose product is closest to prod
-    //   e.g. find f(8) and f(9)
-    // true if product = prod, false if not
-    // push to result
+  
+    while (product < prod) {
+      result = [fibonacci(n), fibonacci(n + 1)];
+      product = result[0] * result[1];
+      product === prod ? result.push(true) : result.push(false);
+      n += 1;
+    }
+  
     return result;
-}  
+}
 
 productFib(4895)  // [55, 89, true]
 productFib(5895)  // [89, 144, false]
